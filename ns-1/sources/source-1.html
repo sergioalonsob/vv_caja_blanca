@@ -1,0 +1,307 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Editor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.practica.cajablanca</a>
+</div>
+
+<h1>Coverage Summary for Class: Editor (com.practica.cajablanca)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Editor</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    55,6%
+  </span>
+  <span class="absValue">
+    (5/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62,5%
+  </span>
+  <span class="absValue">
+    (55/88)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.practica.cajablanca;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import java.io.BufferedReader;
+<i class="no-highlight">4</i>&nbsp;import java.io.File;
+<i class="no-highlight">5</i>&nbsp;import java.io.FileReader;
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;import com.cajanegra.AbstractSingleLinkedListImpl;
+<i class="no-highlight">8</i>&nbsp;import com.cajanegra.EmptyCollectionException;
+<i class="no-highlight">9</i>&nbsp;import com.cajanegra.SingleLinkedListImpl;
+<i class="no-highlight">10</i>&nbsp;
+<i class="no-highlight">11</i>&nbsp;public class Editor {
+<i class="no-highlight">12</i>&nbsp;
+<i class="no-highlight">13</i>&nbsp;	private AbstractSingleLinkedListImpl&lt;AbstractSingleLinkedListImpl&lt;String&gt;&gt; editor;
+<i class="no-highlight">14</i>&nbsp;	private AbstractSingleLinkedListImpl&lt;String&gt; lista;
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;	@SuppressWarnings(&quot;unchecked&quot;)
+<b class="fc"><i class="no-highlight">17</i>&nbsp;	public Editor() {</b>
+<b class="fc"><i class="no-highlight">18</i>&nbsp;		editor = new SingleLinkedListImpl&lt;AbstractSingleLinkedListImpl&lt;String&gt;&gt;();</b>
+<i class="no-highlight">19</i>&nbsp;	}
+<i class="no-highlight">20</i>&nbsp;
+<i class="no-highlight">21</i>&nbsp;	/**
+<i class="no-highlight">22</i>&nbsp;	 * 
+<i class="no-highlight">23</i>&nbsp;	 * @return el tamaño de la lista
+<i class="no-highlight">24</i>&nbsp;	 */
+<i class="no-highlight">25</i>&nbsp;	public int size() {
+<b class="nc"><i class="no-highlight">26</i>&nbsp;		return editor.size();</b>
+<i class="no-highlight">27</i>&nbsp;	}
+<i class="no-highlight">28</i>&nbsp;
+<i class="no-highlight">29</i>&nbsp;	public boolean editIsEmpty() {
+<b class="nc"><i class="no-highlight">30</i>&nbsp;		return this.editor.size() == 0;</b>
+<i class="no-highlight">31</i>&nbsp;	}
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;	/**
+<i class="no-highlight">34</i>&nbsp;	 * 
+<i class="no-highlight">35</i>&nbsp;	 * @param linea
+<i class="no-highlight">36</i>&nbsp;	 * @return la lista correspondiente a la línea pasada como parámetro
+<i class="no-highlight">37</i>&nbsp;	 * @throws EmptyCollectionException si el editor está vacío
+<i class="no-highlight">38</i>&nbsp;	 * @throws Si                       el número de línea es incorrecta lanza
+<i class="no-highlight">39</i>&nbsp;	 *                                  IllegalArgumentException
+<i class="no-highlight">40</i>&nbsp;	 */
+<i class="no-highlight">41</i>&nbsp;	public AbstractSingleLinkedListImpl&lt;String&gt; getLinea(int linea) throws EmptyCollectionException {
+<b class="fc"><i class="no-highlight">42</i>&nbsp;		if (editor.isEmpty()) {</b>
+<b class="nc"><i class="no-highlight">43</i>&nbsp;			throw new EmptyCollectionException(&quot; editor &quot;);</b>
+<i class="no-highlight">44</i>&nbsp;		}
+<b class="fc"><i class="no-highlight">45</i>&nbsp;		if (linea &lt; 0 || linea &gt; editor.size()) {</b>
+<b class="nc"><i class="no-highlight">46</i>&nbsp;			throw new IllegalArgumentException();</b>
+<i class="no-highlight">47</i>&nbsp;		}
+<b class="fc"><i class="no-highlight">48</i>&nbsp;		return this.editor.getAtPos(linea);</b>
+<i class="no-highlight">49</i>&nbsp;	}
+<i class="no-highlight">50</i>&nbsp;
+<i class="no-highlight">51</i>&nbsp;	/**
+<i class="no-highlight">52</i>&nbsp;	 * Leemos un fichero de entrada con líneas de texto que cargaremos en nuestra
+<i class="no-highlight">53</i>&nbsp;	 * lista de listas &quot;lineas&quot;.
+<i class="no-highlight">54</i>&nbsp;	 * 
+<i class="no-highlight">55</i>&nbsp;	 * @param nombre del fichero del que leemos
+<i class="no-highlight">56</i>&nbsp;	 */
+<i class="no-highlight">57</i>&nbsp;	public void leerFichero(String nombreFichero) {
+<b class="fc"><i class="no-highlight">58</i>&nbsp;		File archivo = null;</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;		FileReader fr = null;</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;		BufferedReader br = null;</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;		String regex = &quot;\\s+|,\\s*|\\.\\s*&quot;;</b>
+<i class="no-highlight">62</i>&nbsp;		try {
+<i class="no-highlight">63</i>&nbsp;			// Apertura del fichero y creacion de BufferedReader para poder
+<i class="no-highlight">64</i>&nbsp;			// hacer una lectura comoda (disponer del metodo readLine()).
+<b class="fc"><i class="no-highlight">65</i>&nbsp;			archivo = new File(nombreFichero);</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;			fr = new FileReader(archivo);</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;			br = new BufferedReader(fr);</b>
+<i class="no-highlight">68</i>&nbsp;
+<i class="no-highlight">69</i>&nbsp;			// Lectura del fichero
+<i class="no-highlight">70</i>&nbsp;			String cadena;
+<b class="fc"><i class="no-highlight">71</i>&nbsp;			while ((cadena = br.readLine()) != null) {</b>
+<b class="fc"><i class="no-highlight">72</i>&nbsp;				String[] words = cadena.split(regex);</b>
+<b class="fc"><i class="no-highlight">73</i>&nbsp;				lista = new SingleLinkedListImpl&lt;String&gt;();</b>
+<b class="fc"><i class="no-highlight">74</i>&nbsp;				for (String s : words) {</b>
+<b class="fc"><i class="no-highlight">75</i>&nbsp;					lista.addLast(s);</b>
+<i class="no-highlight">76</i>&nbsp;				}
+<b class="fc"><i class="no-highlight">77</i>&nbsp;				editor.addLast(lista);</b>
+<b class="fc"><i class="no-highlight">78</i>&nbsp;			}</b>
+<b class="nc"><i class="no-highlight">79</i>&nbsp;		} catch (Exception e) {</b>
+<b class="nc"><i class="no-highlight">80</i>&nbsp;			e.printStackTrace();</b>
+<i class="no-highlight">81</i>&nbsp;		} finally {
+<i class="no-highlight">82</i>&nbsp;			// En el finally cerramos el fichero, para asegurarnos
+<i class="no-highlight">83</i>&nbsp;			// que se cierra, tanto si todo va bien como si salta
+<i class="no-highlight">84</i>&nbsp;			// una excepcion.
+<b class="nc"><i class="no-highlight">85</i>&nbsp;			try {</b>
+<b class="fc"><i class="no-highlight">86</i>&nbsp;				if (null != fr) {</b>
+<b class="fc"><i class="no-highlight">87</i>&nbsp;					fr.close();</b>
+<i class="no-highlight">88</i>&nbsp;				}
+<b class="nc"><i class="no-highlight">89</i>&nbsp;			} catch (Exception e2) {</b>
+<b class="nc"><i class="no-highlight">90</i>&nbsp;				e2.printStackTrace();</b>
+<b class="fc"><i class="no-highlight">91</i>&nbsp;			}</b>
+<b class="nc"><i class="no-highlight">92</i>&nbsp;		}</b>
+<i class="no-highlight">93</i>&nbsp;	}
+<i class="no-highlight">94</i>&nbsp;
+<i class="no-highlight">95</i>&nbsp;	// public int numPalabras(int inicio, int fin, String palabra) {
+<i class="no-highlight">96</i>&nbsp;	/**
+<i class="no-highlight">97</i>&nbsp;	 * 
+<i class="no-highlight">98</i>&nbsp;	 * @param inicio
+<i class="no-highlight">99</i>&nbsp;	 * @param fin
+<i class="no-highlight">100</i>&nbsp;	 * @param palabra a buscar en el texto
+<i class="no-highlight">101</i>&nbsp;	 * @return número de apariciones de palabra
+<i class="no-highlight">102</i>&nbsp;	 * @throws EmptyCollectionException
+<i class="no-highlight">103</i>&nbsp;	 * @throws IllegalArgumentException si inicio es &amp;lt; 0 or fin &amp;gt; size
+<i class="no-highlight">104</i>&nbsp;	 */
+<i class="no-highlight">105</i>&nbsp;	@SuppressWarnings(&quot;unchecked&quot;)
+<i class="no-highlight">106</i>&nbsp;	public int numPalabras(int inicio, int fin, String palabra) {
+<b class="fc"><i class="no-highlight">107</i>&nbsp;		if (inicio &lt;= 0)</b>
+<b class="fc"><i class="no-highlight">108</i>&nbsp;			throw new IllegalArgumentException(&quot;La línea de inicio no puede ser menor o igual a cero&quot;);</b>
+<b class="fc"><i class="no-highlight">109</i>&nbsp;		if (fin &gt; this.editor.size())</b>
+<b class="fc"><i class="no-highlight">110</i>&nbsp;			throw new IllegalArgumentException(&quot;La línea fin no puede ser mayor que el máximo de líneas&quot;);</b>
+<b class="fc"><i class="no-highlight">111</i>&nbsp;		int apariciones = 0;</b>
+<b class="fc"><i class="no-highlight">112</i>&nbsp;		if (this.editor.size() &gt; 0) {</b>
+<b class="fc"><i class="no-highlight">113</i>&nbsp;			while (inicio &lt; fin) {</b>
+<b class="fc"><i class="no-highlight">114</i>&nbsp;				this.lista = this.editor.getAtPos(inicio);</b>
+<b class="fc"><i class="no-highlight">115</i>&nbsp;				int pos = 1;</b>
+<b class="fc"><i class="no-highlight">116</i>&nbsp;				while (pos &lt;= this.lista.size()) {</b>
+<b class="fc"><i class="no-highlight">117</i>&nbsp;					String cadena = this.lista.getAtPos(pos);</b>
+<b class="fc"><i class="no-highlight">118</i>&nbsp;					if (cadena.equals(palabra)) {</b>
+<b class="fc"><i class="no-highlight">119</i>&nbsp;						apariciones++;</b>
+<i class="no-highlight">120</i>&nbsp;					}
+<b class="fc"><i class="no-highlight">121</i>&nbsp;					pos++;</b>
+<b class="fc"><i class="no-highlight">122</i>&nbsp;				}</b>
+<b class="fc"><i class="no-highlight">123</i>&nbsp;				inicio++;</b>
+<b class="fc"><i class="no-highlight">124</i>&nbsp;			}</b>
+<i class="no-highlight">125</i>&nbsp;		}
+<b class="fc"><i class="no-highlight">126</i>&nbsp;		return apariciones;</b>
+<i class="no-highlight">127</i>&nbsp;	}
+<i class="no-highlight">128</i>&nbsp;
+<i class="no-highlight">129</i>&nbsp;	public int numPalabras() throws EmptyCollectionException {
+<b class="nc"><i class="no-highlight">130</i>&nbsp;		if (this.editIsEmpty()) {</b>
+<b class="nc"><i class="no-highlight">131</i>&nbsp;			throw new EmptyCollectionException(&quot;El editor está vacío&quot;);</b>
+<i class="no-highlight">132</i>&nbsp;		}
+<b class="nc"><i class="no-highlight">133</i>&nbsp;		int numPalabras = 0;</b>
+<b class="nc"><i class="no-highlight">134</i>&nbsp;		if (this.size() &gt; 0) {</b>
+<b class="nc"><i class="no-highlight">135</i>&nbsp;			int i = 1;</b>
+<b class="nc"><i class="no-highlight">136</i>&nbsp;			while (i &lt;= this.size()) {</b>
+<b class="nc"><i class="no-highlight">137</i>&nbsp;				this.lista = getLinea(i);</b>
+<b class="nc"><i class="no-highlight">138</i>&nbsp;				for (String s : lista) {</b>
+<b class="nc"><i class="no-highlight">139</i>&nbsp;					numPalabras++;</b>
+<b class="nc"><i class="no-highlight">140</i>&nbsp;				}</b>
+<b class="nc"><i class="no-highlight">141</i>&nbsp;				i++;</b>
+<i class="no-highlight">142</i>&nbsp;			}
+<i class="no-highlight">143</i>&nbsp;		}
+<b class="nc"><i class="no-highlight">144</i>&nbsp;		return numPalabras;</b>
+<i class="no-highlight">145</i>&nbsp;	}
+<i class="no-highlight">146</i>&nbsp;
+<i class="no-highlight">147</i>&nbsp;	/**
+<i class="no-highlight">148</i>&nbsp;	 * 
+<i class="no-highlight">149</i>&nbsp;	 * @return la palabra de mayor longitud
+<i class="no-highlight">150</i>&nbsp;	 * @throws EmptyCollectionException
+<i class="no-highlight">151</i>&nbsp;	 */
+<i class="no-highlight">152</i>&nbsp;	public String mayorLongitud() throws EmptyCollectionException {
+<b class="nc"><i class="no-highlight">153</i>&nbsp;		String mayor = null;</b>
+<b class="nc"><i class="no-highlight">154</i>&nbsp;		if (this.editor.size() &gt; 0) {</b>
+<b class="nc"><i class="no-highlight">155</i>&nbsp;			for (int i = 1; i &lt;= this.editor.size(); i++) {</b>
+<b class="nc"><i class="no-highlight">156</i>&nbsp;				this.lista = this.editor.getAtPos(i);</b>
+<b class="nc"><i class="no-highlight">157</i>&nbsp;				for (int pos = 1; pos &lt;= this.lista.size(); pos++) {</b>
+<b class="nc"><i class="no-highlight">158</i>&nbsp;					String cadena = this.lista.getAtPos(pos);</b>
+<b class="nc"><i class="no-highlight">159</i>&nbsp;					if (mayor == null) {</b>
+<b class="nc"><i class="no-highlight">160</i>&nbsp;						mayor = cadena;</b>
+<b class="nc"><i class="no-highlight">161</i>&nbsp;					} else if (cadena.length() &gt; mayor.length()) {</b>
+<b class="nc"><i class="no-highlight">162</i>&nbsp;						mayor = cadena;</b>
+<i class="no-highlight">163</i>&nbsp;					}
+<i class="no-highlight">164</i>&nbsp;				}
+<i class="no-highlight">165</i>&nbsp;			}
+<i class="no-highlight">166</i>&nbsp;		}
+<b class="nc"><i class="no-highlight">167</i>&nbsp;		return mayor;</b>
+<i class="no-highlight">168</i>&nbsp;	}
+<i class="no-highlight">169</i>&nbsp;
+<i class="no-highlight">170</i>&nbsp;	/**
+<i class="no-highlight">171</i>&nbsp;	 * @param palabra
+<i class="no-highlight">172</i>&nbsp;	 * @param nuevaPalabra Sustituye palabra por nuevapalabra a lo largo de todo el
+<i class="no-highlight">173</i>&nbsp;	 *                     texto
+<i class="no-highlight">174</i>&nbsp;	 */
+<i class="no-highlight">175</i>&nbsp;	public void sustituirPalabra(String palabra, String nuevaPalabra) {
+<b class="fc"><i class="no-highlight">176</i>&nbsp;		if (this.editor.size() &gt; 0) {</b>
+<b class="fc"><i class="no-highlight">177</i>&nbsp;			AbstractSingleLinkedListImpl&lt;AbstractSingleLinkedListImpl&lt;String&gt;&gt; nuevoEditor = </b>
+<i class="no-highlight">178</i>&nbsp;					new SingleLinkedListImpl&lt;AbstractSingleLinkedListImpl&lt;String&gt;&gt;();
+<b class="fc"><i class="no-highlight">179</i>&nbsp;			int i=1;</b>
+<i class="no-highlight">180</i>&nbsp;			do {
+<b class="fc"><i class="no-highlight">181</i>&nbsp;				AbstractSingleLinkedListImpl&lt;String&gt; aux = new SingleLinkedListImpl&lt;String&gt;();</b>
+<b class="fc"><i class="no-highlight">182</i>&nbsp;				this.lista = this.editor.getAtPos(i);</b>
+<b class="fc"><i class="no-highlight">183</i>&nbsp;				int j=1;</b>
+<b class="fc"><i class="no-highlight">184</i>&nbsp;				while (j&lt;=this.lista.size()) {</b>
+<b class="fc"><i class="no-highlight">185</i>&nbsp;					if (this.lista.getAtPos(j).equals(palabra)) {</b>
+<b class="fc"><i class="no-highlight">186</i>&nbsp;						aux.addLast(nuevaPalabra);</b>
+<i class="no-highlight">187</i>&nbsp;					}else {
+<b class="fc"><i class="no-highlight">188</i>&nbsp;						aux.addLast(this.lista.getAtPos(j));</b>
+<i class="no-highlight">189</i>&nbsp;					}
+<b class="fc"><i class="no-highlight">190</i>&nbsp;					j++;</b>
+<i class="no-highlight">191</i>&nbsp;				}
+<b class="fc"><i class="no-highlight">192</i>&nbsp;				nuevoEditor.addLast(aux);</b>
+<b class="fc"><i class="no-highlight">193</i>&nbsp;				i++;</b>
+<b class="fc"><i class="no-highlight">194</i>&nbsp;			}while (i&lt;=this.editor.size());</b>
+<b class="fc"><i class="no-highlight">195</i>&nbsp;			editor = nuevoEditor;</b>
+<i class="no-highlight">196</i>&nbsp;		}
+<i class="no-highlight">197</i>&nbsp;	}
+<i class="no-highlight">198</i>&nbsp;
+<i class="no-highlight">199</i>&nbsp;	public static void main(String[] args) throws EmptyCollectionException {
+<i class="no-highlight">200</i>&nbsp;	
+<i class="no-highlight">201</i>&nbsp;	}
+<i class="no-highlight">202</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-12-12 11:10</div>
+</div>
+</body>
+</html>
